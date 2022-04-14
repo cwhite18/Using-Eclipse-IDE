@@ -1,0 +1,46 @@
+package automatebrowers;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+public class TestAuto {
+
+
+
+public static void main(String[] args) throws InterruptedException {
+// TODO Auto-generated method stub
+String url = "https://www.clayton.edu/";
+String driverpath = "/Users/christopherwhite/Desktop/EclipseBIN/chromedriver";
+
+// /Users/christopherwhite/desktop/EclipseBIN
+
+System.setProperty("webdriver.chrome.driver", driverpath);
+WebDriver driver = new ChromeDriver();
+
+driver.get(url);
+driver.manage().window().maximize();
+
+String expectedTitle = "Home - Clayton State University";
+String actualTitle = driver.getTitle();
+
+if(expectedTitle.contentEquals(actualTitle))
+System.out.println("Test Passed");
+else
+{
+System.out.println("Failed to load page!");
+System.exit(0);
+
+}
+
+
+
+JavascriptExecutor js = (JavascriptExecutor) driver;
+for (int i = 0; i < 30;i++) {
+js.executeScript("windows.scrollBy(0,1000)", "");
+Thread.sleep(250);
+}
+driver.findElement(By.linkText("parking")).click();
+Thread.sleep(1000);
+driver.findElement(By.linkText("Parking Rules and Requlations")).click();
+}
+}
